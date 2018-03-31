@@ -1,0 +1,1012 @@
+Internet Explorer 7+, Firefox 42.0, Yandex 15.10, Chrome 46.0, Opera 33.0, Safari 5.1.7
+
+\n => yeni satýr
+\t => tab (Chrome, Opera ve Yandex desteklemiyor)
+\0 => (Sadece IE ve Edge destekliyor)
+\\ => backslash
+\' => tek týrnak içinde tek týrnak kullanýmý
+\" => týrnak içinde týrnak kullanýmý
+// => açýklama satýrý
+/* */ => açýklama satýrý
+
+
+
+
+
+-Deðiþkenler-
+#Deðiþken isimleri 255 karakterden fazla olamaz.
+#Deðiþken isimleri harf, _, $ ile baþlayabilir. Rakam ile baþlayamaz.
+#Deðiþken isimlerinde Türkçe karakterler, özel karakterler(_, $ hariç), anahtar kelimeler ve boþluk kullanýlamaz.
+
+var name = "value"; => string
+
+var name = number; => number
+(
+	#virgüllü sayýlar virgülle deðil nokta ile yazýlýr. ÖR: var sayi=10.2;
+	#onaltý tabanýndaki sayýlarýn önünde "0x" bulunur. ÖR: var sayi=0xFF;
+)
+
+var name = true or false; => boolean
+
+NOT:
+-"var" kullanýlmadan tanýmlanan deðiþkenler delete operatörü ile silinebilir. ÖR: sayi=15; delete sayi; alert(sayi); //Mesaj penceresi gösterilmez.
+Olmayan bir deðiþkenin deðerini yazdýrmak istediðimiz zaman da mesaj penceresi gösterilmez. ÖR: alert(x); //Mesaj penceresi çýkmayacaktýr.
+-"const" ifadesi ile sabit(deðeri deðiþtirilemeyen) deðiþkenler oluþturulabilir(IE 11+). ÖR: const isim="Hamdi";
+-var name = null; alert(name); //Tarayýcýlar "null" þeklinde bir mesaj verdi.
+-var name; alert(name); //Tarayýcýlar "undefined" uyarýsý verir.
+
+
+
+
+
+-Operatörler-
+Aritmerik Operatörler
++ => String ifadeleri birleþtirir, sayýsal ifadeleri toplar.
+- => Çýkarma yapmak için kullanýlýr.
+* => Çarpma yapmak için kullanýlýr.
+/ => Bölme yapmak için kullanýlýr.
+% => Bölümünden kalaný bulmak için kullanýlýr. ÖR: alert(10%4); //2
+
+Atama Operatörleri
+= => Soldaki deðere saðdakini atar.
++= => Soldaki deðere saðdakini ekler.
+-= => Soldaki deðerden saðdakini çýkarýr.
+*= => Soldaki deðer ile saðdakini çarpar.
+/= => Soldaki deðeri saðdakine böler.
+%= => Soldaki deðerin saðdakine bölümünden kalaný verir.
+
+Artýrma ve Azaltma Operatörleri
+x++ => x'i bir artýr.
+(
+	#++x ile arasýndaki fark þu örnekle anlaþýlabilir:
+		var sayi1=10; 
+		alert(sayi1++); //10
+		alert(sayi1); //11
+
+		var sayi2=5;
+		alert(++sayi2); //6
+		alert(sayi2); //6
+)
+++x => x'i bir artýr.
+x-- => x'i bir azalt.
+--x => x'i bir azalt.
+
+Karþýlaþtýrma Operatörleri
+== => Eþitse
+=== => Eþitse(veri tipleri de karþýlaþtýrmaya dahil edilir)
+!= => Eþit deðilse
+!== => Eþit deðilse(veri tipleri de karþýlaþtýrmaya dahil edilir)
+> => Büyükse
+< => Küçükse
+>= => Büyük ya da eþitse
+<= => Küçük ya da eþitse
+
+Mantýksal Operatörler
+&& => Ýki sonucun da olumlu olmasý durumu
+|| => Ýki sonuçtan birinin ya da ikisinin doðru olmasý durumu
+! => Sonucun olumsuz olmasý durumu
+
+Bit Düzeyinde Ýþlem Yapan Operatörler
+& => AND Operatörü
+| => OR Operatörü
+~ => NOT Operatörü
+^ => XOR Operatörü
+(
+	ÖR:
+	alert(25 & 14); //8
+	alert(25 | 14); //31
+	alert(~25); //-26
+	alert(25 ^ 14); //23
+)
+
+Kaydýrma Operatörleri
+<< => Sola kaydýrma
+>> => Saða kaydýrma
+(
+	ÖR:
+	alert(16<<1); //32 (Sayý 2 ile çarpýlýr)
+	alert(16<<2); //64 (Sayý 2 defa 2 ile çarpýlýr)
+	alert(16>>1); //8 (Sayý 2'ye bölünür)
+	alert(16>>2); //4 (Sayý 2 defa 2'ye bölünür.)
+)
+
+Özel Operatörler
+(x==y) ? "x" : "y" => Koþul operatörü. Parantez içi olumluysa "x" deðilse "y" döner.
+typeof(x) => typeof operatörü. Parametre olarak verilen deðerin tipini döndürür.
+in
+(
+	#ÖR 1:
+	var ogrenci={ad:'EREN', yas:19, tanit:function(){}};
+	//"ad" ogrenci içinde mi? NOT:Deðiþken veya fonksiyon adý týrnak içinde yazýlmalýdýr.
+	document.write("ad" in ogrenci); //true
+	document.write("yas" in ogrenci); //true
+	document.write("soyad" in ogrenci); //false
+	document.write("tanit" in ogrenci); //true
+	document.write("tanit()" in ogrenci); //false
+
+	ÖR 2:
+	document.write("PI" in Math); //true
+	document.write("pow" in Math); //true
+	document.write("pow()" in Math); //false
+	document.write("Pow" in Math); //false
+
+	ÖR 3:
+	var gunler=["Pazartesi", "Salý", "Çarþamba", "Perþembe", "Cuma", "Cumartesi", "Pazar"];
+	document.write("Salý" in gunler); //false
+	document.write(0 in gunler); //true. sýfýrýncý indeks "Pazartesi"
+	document.write("1" in gunler); //true
+	document.write(10 in gunler); //false
+)
+instanceof => Bir nesnenin hangi sýnýftan olduðunu öðrenmek için kullanýlýr.
+(
+	#ÖR 1:
+	var dizi=new Array(1, 2, 3);
+	document.write(dizi instanceof Array); //true
+	document.write(dizi instanceof Object); //true
+	document.write(dizi instanceof Function); //false
+
+	ÖR 2:
+	var ogrenci={ad:'EREN', yas:19};
+	document.write(ogrenci instanceof Array); //false
+	document.write(ogrenci instanceof Object); //true
+	
+	ÖR 3:
+	function ogrenci(){}
+	var nesne=new ogrenci();
+	document.write(nesne instanceof ogrenci); //true
+	document.write(nesne instanceof Object); //true
+	document.write(nesne instanceof Function); //false
+	document.write(ogrenci instanceof Function); //true
+	document.write(ogrenci instanceof Object); //true
+
+	ÖR 4:
+	document.write(Function instanceof Object); //true
+	document.write(Object instanceof Function); //true
+)
+delete
+new => Programcý tarafýndan oluþturulan ya da hazýr olarak gelen sýnýflarýn örneðini almamýzý saðlar.
+this
+
+
+
+
+
+-Karar Yapýlarý-
+if(){}, else if(){}, else{}
+
+switch(i){
+	case 1: // i 1 ise
+	alert("bir"); // Yapýlacak iþlemler
+	break;
+	case 2: //i 2 ise
+	alert("iki"); // Yapýlacak iþlemler
+	break;
+	.
+	.
+	.
+	default: // Hiçbiri deðilse
+	alert("bilinmiyor"); // Yapýlacak iþlemler
+}
+
+
+
+
+
+-Döngüler ve Deyimler-
+for(){}
+while(){}
+do{}while();
+
+"for in" döngüsü
+(
+	#ÖR:
+	var dizi=["Ocak", "Þubat", "Mart", "Nisan", "Mayýs"];
+	for(x in dizi){
+		document.write(dizi[x]);
+	}
+)
+
+break; => break deyimi. döngüyü sonlandýrmak için kullanýlýr.
+continue; => continue deyimi. döngü içinde belirli bir koþulun kontrolüyle bir sonraki döngü adýmýna gidilmesini gerçekleþtirir.
+return; => return deyimi. fonksiyonu sonlandýrmak için kullanýlýr.
+(
+	#"return deger;" þeklinde bir kullanýmý da vardýr. fonksiyonun çaðrýldýðý yere deðer göndermek için kullanýlýr.
+	#"return;" ifadesinden sonra yazýlan kodlar çalýþtýrýlmaz.
+)
+
+
+
+
+
+-Ýþlem Önceliði-
+Sýrasýyla parantezler, fonksiyonlar, aritmetik iþlemler, karþýlaþtýrma iþlemleri, mantýksal iþlemler, þart iþlemleri.
+
+
+
+
+
+-Fonksiyonlar-
+function isim(){}, var isim=function(){}, (function(){})(); => Fonksiyon oluþturma yöntemleri
+(
+	#Fonksiyonlar "return" deyimi ile geriye deðer gönderebilir.
+	#Fonksiyonlar oluþturulurken parametre belirtilmese de çaðrýlýrken parametre kullanýlabilir.
+	ÖR:
+	var kisi=function(){
+	alert(arguments[0]+"-"+arguments[1]); //15-20 arguments[0] birinci parametreyi, arguments[1] ikinci parametreyi verir.
+	alert(arguments.length); //2 arguments.length parametre sayýsýný verir.
+	}
+	kisi(15,20); //Parametreler arguments dizisine aktarýlýr. Bu diziye fonksiyon içinden eriþilebilir.
+)
+
+Hazýr Fonksiyonlar
+escape(deðer); => Parametre olarak verilen deðeri unicode formatýnda þifreler. ÖR: alert(escape("içerik ne?")); //i%E7erik%20ne%3F NOT: %E7 ç(küçük) harfinin, %20 space tuþunun, %3F soru iþaretinin URL kodudur.
+unescape(deðer); => escape fonksiyonu ile þifrelenmiþ bilgiyi çözmek için kullanýlýr.
+encodeURI(deðer); => Parametre olarak verilen deðeri UTF-8 formatýnda þifreler. ÖR: alert(encodeURI("içerik ne?")); //i%C3%A7erik%20ne?
+(
+	#aþaðýdaki karakterler kodlanmaz. bu karakterleri kodlamak için encodeURIComponent kullanýlmalýdýr.
+	/ ? : @ & = + $
+)
+decodeURI(deðer); => encodeURI fonksiyonu ile þifrelenmiþ bilgiyi çözmek için kullanýlýr.
+encodeURIComponent(deger); => Parametre olarak verilen deðeri UTF-8 formatýnda þifreler. Kodlamaya /, ?, :, @, &, =, +, $ karakterleri de dahildir. ÖR: alert(encodeURIComponent("içerik ne?")); //i%C3%A7erik%20ne%3F NOT: %20 space tuþunun, %3F soru iþaretinin URL kodudur.
+decodeURIComponent(deðer); => encodeURIComponent fonksiyonu ile þifrelenmiþ bilgiyi çözmek için kullanýlýr.
+parseFloat(deðer); => Parametre olarak verilen deðeri number tipine dönüþtürüp geri gönderir(Virgüllü sayýlar için kullanýlýr).
+(
+	#ÖR 1:
+	var i="0";
+	alert(typeof(i)); //string
+	parseFloat(i);
+	alert(typeof(i)); //string
+
+	ÖR 2:
+	var i="0";
+	alert(typeof(i)); //string
+	alert(typeof(parseFloat(i))); //Number
+)
+parseInt(deðer); => Parametre olarak verilen deðeri number tipine dönüþtürüp geri gönderir(Tamsayýlar için kullanýlýr).
+(
+	#ÖR 1:
+	var i="5.2";
+	alert(parseFloat(i)); //5.2
+
+	ÖR 2:
+	var i="5.2";
+	alert(parseInt(i)); //5
+)
+String(deðer); => Parametre olarak verilen deðeri string tipine dönüþtürüp geri gönderir.
+isNaN(deðer); => Parametre olarak verilen deðer sayý ise false, deðilse true döner.
+(
+	#ÖR:
+	alert(isNaN(457)); //false
+	alert(isNaN("-1")); //false
+	alert(isNaN(0)); //false
+	alert(isNaN("Hello")); //true
+	alert(isNaN("2005/12/12")); //true
+)
+eval
+(
+	#ÖR:
+	<script>
+	function fn_Deneme(){
+		document.write("Javascript Öðreniyoruz");
+	}
+	eval("fn_Deneme();"); //NOT : eval fonksiyonuna parametre olarak verilen komutlar týrnak içine alýnmalýdýr.
+	</script>
+
+	ÖR 2:
+	document.write(eval("2+2")); //4
+	document.write(eval("new String('2+2')")); //2+2
+	document.write(eval("new String(2+2)")); //4
+)
+
+
+
+
+
+-Hata Yönetimi-
+try{ //Hata verebilecek kodlar try bloðu arasýna yazýlýr.
+
+}
+catch(err){ //Hata oluþursa catch bloðu çalýþýr.
+	alert("Hata oluþtu: "+err.message);
+}
+finally{ //Hata olsa da olmasa da çalýþmasý istenen kodlar finally bloðuna yazýlýr.
+
+}
+
+Hata Döndürmek
+(
+	#ÖR:
+	var sayi=1;
+	try{
+		if(sayi==1) throw "Hata1";
+		else if(sayi==2) throw "Hata2";
+	}
+	catch(a){
+		if(a=="Hata1") alert("bir");
+		else if(a=="Hata2") alert("iki");
+	}
+	#Aþaðýdaki örnekte throw ile hata nesnesi döndürülmüþtür.
+	ÖR:
+	var hata1=new Error("Mesaj");
+	var isim="Eren";
+	try{
+		if(isim=="Eren") throw hata1;
+	}
+	catch(a){
+		alert(a.message); //Mesaj
+	}
+)
+
+
+
+
+
+-Diziler-
+Tek Boyutlu Diziler
+var dizi1 = new Array("a", "b", 1, 2, function(){}, true); dizi1[4](4,3); => Condensed dizi
+var dizi2 = [1, 2]; => Literal dizi
+var dizi3 = new Array(); dizi3[0]="a"; dizi3["e"]=2; => Regular dizi
+(
+	ÖR:
+	var dizi1=new Array(1,{ad:"Eren", soyad:"Satý"});
+	alert(dizi1[1].soyad); //Satý
+)
+
+Çok Boyutlu Diziler
+var dizi1 = Array(new Array(0, 1, 2), new Array("a", "b", "c"));
+var dizi2 = [[0, 1, 2], ["a", "b", "c"]];
+var dizi3 = new Array(); dizi3[0]=new Array(0, 1, 2); dizi3[1]=new Array("a", "b", "c");
+
+Dizi Fonksiyonlarý
+length => Dizinin eleman sayýsýný verir.
+(
+	#ÖR:
+	var dizi=[1, 2, 3, 4, 5, 6, 7, 8, 9];
+	alert(dizi.length); //9
+)
+concat() => Dizileri birleþtirip geri döndürür.
+(
+	#ÖR:
+	var dizi1=["a", "b", "c"];
+	var dizi2=["d", "e", "f"];
+	document.write(dizi1.concat(dizi2)); //a,b,c,d,e,f
+
+	ÖR 2:
+	var dizi1=["a", "b", "c"];
+	var dizi2=["d", "e", "f"];
+	var dizi3=[1, 2, 3];
+	document.write(dizi1.concat(dizi2, dizi3, 4, 5, 6)); //a,b,c,d,e,f,1,2,3,4,5,6
+)
+join() => Parametre olarak verilen deðeri dizi elemanlarý arasýna ekler ve string olarak döndürür.
+(
+	#ÖR:
+	var dizi=[1, 2, 3];
+	document.write(dizi.join("+")); //1+2+3
+	document.write(dizi.join("asdf")); //1asdf2asdf3
+)
+shift() => Dizinin ilk elemanýný verir ve bu elemaný dizi içinden siler.
+(
+	#ÖR:
+	var dizi=[1, 2, 3];
+	document.write(dizi+"<br>"); //1,2,3
+	document.write(dizi.shift()+"<br>"); //1
+	document.write(dizi); //2,3
+)
+pop() => Dizinin son elemanýný verir ve bu elemaný dizi içinden siler.
+push() => Dizinin sonuna eleman eklemek için kullanýlýr.
+(
+	#ÖR:
+	var dizi=[1, 2, 3];
+	dizi.push(4);
+	dizi.push(5, 6);
+	document.write(dizi); //1,2,3,4,5,6
+)
+unshift() => Dizinin baþýna eleman eklemek için kullanýlýr.
+reverse()
+(
+	#ÖR:
+	var dizi=[1, 2, 3];
+	dizi.reverse();
+	document.write(dizi); //3,2,1
+)
+slice() => Dizinin bir bölümünü kopyalar ve yeni bir dizi olarak döndürür. Ýlk parametre baþlangýç, ikinci parametre ise bitiþ indeksidir. Bitiþ indeksi
+belirtilmezse dizinin sonuna kadar seçilir. Bitiþ indeksi negatif deðer aldýðýnda dizi sonundan bitiþ indeksi kadar eleman seçilmez.
+(
+	#ÖR:
+	var dizi=[1, 2, 3, 4, 5, 6, 7];
+	document.write(dizi.slice(1)+"<br>"); //2,3,4,5,6,7
+	document.write(dizi.slice(1,5)+"<br>"); //2,3,4,5
+	document.write(dizi.slice(3,-1)+"<br>"); //4,5,6
+	document.write(dizi); //1,2,3,4,5,6,7
+)
+splice() => Dizi içeriðini, elemanlarý silerken yeni elemanlar ekleyerek deðiþtirir.
+(
+	#ÖR:
+	var dizi=["A", "B", "C", "D", "E"];
+	var silinen=dizi.splice(1,3,"Z","Y","U"); //splice(baþlangýç indeksi, Çýkarýlacak eleman sayýsý, Eklenecek elemanlar)
+	document.write(dizi+"<br>"); //A,Z,Y,U,E
+	document.write(silinen); //B,C,D
+)
+indexOf() => Parametre olarak verilen deðeri dizi içinde arar, bulursa ilk geçtiði yerin indeks numarasýný bulamazsa -1 döndürür(IE 9+).
+(
+	#ÖR:
+	var dizi=["Kocaeli", "Ankara", "Ýstanbul", "Kocaeli"];
+	document.write(dizi.indexOf("Kocaeli")); //0
+	document.write(dizi.indexOf("Eskiþehir")); //-1	
+	document.write(dizi.indexOf("Kocaeli",1)); //3 NOT:Ýkinci parametre baþlangýç indeksidir.
+)
+lastIndexOf() => Parametre olarak verilen deðeri dizi içinde arar, bulursa son geçtiði yerin indeks numarasýný bulamazsa -1 döndürür(IE 9+).
+(
+	#ÖR:
+	var dizi=["Kocaeli", "Ankara", "Ýstanbul", "Kocaeli"];
+	document.write(dizi.lastIndexOf("Kocaeli")); //3
+	document.write(dizi.lastIndexOf("Eskiþehir")); //-1	
+	document.write(dizi.lastIndexOf("Kocaeli",3)); //3 NOT:Ýkinci parametre bitiþ indeksidir.
+)
+map() => Dizi elemanlarýný belirtilen bir fonksiyondan geçirerek dizi halinde geri döndürür(IE 9+).
+(
+	#ÖR:
+	function kare(n){
+		return n*n;
+	}
+	var dizi=['5', '6', '7', '8']; //NOT:Sayýlar týrnak içinde yazýlmasa da olur
+	var yeni_dizi=dizi.map(kare);
+	document.write(dizi+"<br>"); //5,6,7,8
+	document.write(yeni_dizi); //25,36,49,64
+
+	ÖR 2:
+	var dizi=[2,3,4];
+	var yeni_dizi=dizi.map(function(n){
+		return n*n;
+	});
+	document.write(dizi+"<br />"); //2,3,4
+	document.write(yeni_dizi); //4,9,16
+)
+toString() => Dizi elemanlarýný string olarak döndürür.
+(
+	#ÖR:
+	var dizi=["Ocak", "Þubat", "Mart", "Nisan", 4, 5];
+	document.write(dizi.toString()); //Ocak,Þubat,Mart,Nisan,4,5 
+	document.write(typeof(dizi)+"<br>"); //object
+	document.write(typeof(dizi.toString())); //string
+
+)
+forEach() => Dizideki her eleman için bir fonksiyon çalýþtýrýr(IE 9+).
+(
+	#ÖR:
+	[1, 2, 3].forEach(function(num){
+		document.write(num+"<br>"); //1, 2, 3 
+	});
+)
+filter() => Dizi elemanlarýný filtrelemek için kullanýlýr(IE 9+).
+(
+	#ÖR:
+	[1, 2, 3].filter(function(num){
+		return num<=2; //[1,2] döner.
+	});
+)
+every() => (IE 9+)
+(
+	#ÖR 1:
+	[1, 2, 3].every(function(num){
+		return num<4; //true döner. çünkü dizideki tüm sayýlar 4'ten küçüktür.
+	});
+
+	ÖR 2:
+	[1, 2, 3, 4].every(function(num){
+		return num<4; //false döner.
+	});
+)
+some() => every gibi çalýþýr fakat elemanlardan en az birisi koþulu saðlýyorsa true, aksi halde false döndürür(IE 9+).
+(
+	#ÖR:
+	[1, 2, 3].some(function(num){
+		return num<3; //true döner. çünkü dizi içinde 3'den küçük sayý bulunmaktadýr.
+	});
+)
+sort()
+(
+	#ÖR:
+	var dizi=["C","B","D","A","E"]; //Dizi elemanlarýný alfabetik olarak sýralar.
+	dizi.sort();
+	document.write(dizi); //A,B,C,D,E
+
+	ÖR 2:
+	var dizi=[10,5,4,6,15,2,95,23]; //Sayýlarýn en soldaki basamaðýnýn küçüklüðüne göre sýralama yapar.
+	dizi.sort();
+	document.write(dizi); //10,15,2,23,4,5,6,95 
+
+	ÖR 3:
+	var dizi=["AA","BA","AC","BC","BB"]; 
+	dizi.sort();
+	document.write(dizi); //AA,AC,BA,BB,BC
+)
+reduce() => (IE 9+)
+
+
+
+
+
+-Olaylar-
+onload => sayfa yüklendikten sonra
+(
+	#ÖR:
+	function fonksiyon1(){
+		alert("Sayfa Yüklendi!"); //Sayfa Yüklendi!
+	}
+	window.onload=fonksiyon1;
+)
+onerror => Hata meydana geldiðinde
+(
+	#ÖR:
+	<script>
+	function fonksiyon1(){
+		alert("Hata oluþtu!"); //Hata oluþtu!
+	}
+	window.onerror=fonksiyon1;
+	function hataliFonksiyon(){
+		Nesne.style.color = Red;
+	}
+	</script>
+	<input type="button" value="Göster" onclick="hataliFonksiyon()" />
+)
+onfocus => Nesneye odaklanýldýðýnda
+onblur => Nesne focus özelliðini kaybettiðinde
+onchange => Nesnenin deðeri deðiþtiðinde
+(
+	#ÖR:
+	<script>
+	function fFocus(){
+	document.getElementById("ornekDiv").innerHTML+="Focus<br>"
+	}
+	function fBlur(){
+	document.getElementById("ornekDiv").innerHTML+="Blur<br>"
+	}
+	function fChange(){
+	document.getElementById("ornekDiv").innerHTML+="Change<br>"
+	}
+	</script>
+	<input id="ornekText" type="text" onfocus="fFocus()" onblur="fBlur()" onchange="fChange()" />
+	<div id="ornekDiv"></div>
+
+	#ÖR 2:
+	<script>
+	window.onfocus=function(){
+	document.getElementById("Kutu").innerHTML="focus oldu";
+	}
+	window.onblur=function(){
+	document.getElementById("Kutu").innerHTML="blur oldu";
+	}
+	</script>
+	<div id="Kutu"></div>
+)
+onreset => Form resetlenmeden önce
+onsubmit => Form gönderilmeden önce
+!onkeydown => Klavyeden bir tuþa basýldýðýnda
+!onkeypress => onkeydown'dan sonra
+!onkeyup => Klavyeden basýlan tuþ býrakýldýðýnda
+(
+	#ÖR:
+	<div id="ornekDiv"></div>
+	<script>
+	var div=document.getElementById("ornekDiv");
+	function kD(){
+		div.innerHTML+='keydown<br>';
+	}
+	function kP(){
+		div.innerHTML+='keypress<br>';
+	}
+	function kU(){
+		div.innerHTML+='keyup<br>';
+	}
+	document.onkeydown=kD;
+	document.onkeypress=kP;
+	document.onkeyup=kU;
+	</script>
+	#Tuþ basýlý olarak tutulursa keydown ve keypress olaylarý devamlý gerçekleþir. bu sýrada keyup çalýþmaz(keyup, basýlý tutulan tuþ býrakýldýðýnda çalýþacaktýr)
+)
+onclick => Farenin sol tuþuna týklandýðýnda ya da tekerleðine basýldýðýnda. NOT: Firefox tarayýcýsýnda fare tekerleðine basýlýrsa olay gerçekleþmez.
+ondblclick => Farenin sol tuþuna çift týklandýðýnda.
+onmouseover => Fare ile üzerine gelindiðinde
+onmouseout => Fare üzerinden çekildiðinde
+onmousemove => Fare ile üzerinde gezildikçe
+onmousedown => Farenin herhangi bir tuþuna basýldýðýnda
+(
+	#ÖR:
+	<script>
+	function fonksiyon1(olay){
+		olay = olay || event;
+		document.getElementById("ornekDiv").innerHTML+=olay.button; //event.button basýlan tuþu öðrenmek için kullanýlýr : 0 => Sol Tuþ, 1 => Tekerleðe Basýlmýþ,
+									    //2 => Sað Tuþ NOT: IE 8 ve önceki sürümlerde 1 => Sol Tuþ, 4 => Tekerlek, 2 => Sað Tuþ
+	}
+	document.onmousedown=fonksiyon1;
+	</script>
+	<div id="ornekDiv"></div>
+)
+onmouseup => Farenin basýlý tuþu býrakýldýðýnda
+(
+	#ÖR:
+	<script>
+	function fonksiyon1(olay){
+		olay = olay || event;
+		document.getElementById("ornekDiv").innerHTML+=olay.button;
+	}
+	document.onmouseup=fonksiyon1;
+	</script>
+	<div id="ornekDiv"></div>
+)
+onscroll => Kaydýrma çubuðu hareket ettirildiðinde
+(
+	#ÖR:
+	<script>
+	window.onscroll=function(){
+		document.getElementById("ornekDiv").innerHTML+="Hareket ettirildi<br>";
+	}
+	</script>
+	<div id="ornekDiv" style="width:2048px; height:2048px; background-color:olive;"></div>
+
+	#ÖR 2:
+	<script>
+	function f1(){
+		alert("Týklandý");
+	}
+	</script>
+	<div id="ornekDiv" style="width:200px; height:200px; background-color:olive; overflow:scroll" onscroll="f1()">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<br>
+	<br<br><br><br<br><br><br<br><br><br<br><br><br<br><br><br<br><br><br<br><br><br<br><br><br<br><br><br<br><br><br<br><br><br<br><br><br<br><br><br<br><br>
+	<br<br></div>
+)
+
+
+
+
+
+-Hazýr Nesneler-
+String
+length => string ifadenin uzunluðunu verir.
+(
+	#ÖR:
+	document.write("EREN".length); //4
+)
+charAt(indeks) => string ifade içinde belirtilen konumdaki karakteri verir.
+(
+	#ÖR:
+	alert("EREN SATI".charAt(0)); //E
+	alert("EREN SATI".charAt(5)); //S
+)
+charCodeAt(indeks) => string ifade içinde belirtilen konumdaki karakterin ASCII kodunu verir. NOT : Büyük küçük harf duyarlýlýðý vardýr.
+(
+	#ÖR:
+	alert("Ahmet".charCodeAt(0)); //65
+)
+concat() => string ifadeleri birleþtirmek için kullanýlýr.
+(
+	#ÖR:
+	document.write("TP-".concat("LINK")); //TP-LINK
+
+	ÖR 2:
+	var gun="Salý";
+	var gun2="Çarþamba";
+	var gun3="Perþembe";
+	document.write("Pazartesi".concat(gun, gun2, gun3, "Cuma")); //PazartesiSalýÇarþambaPerþembeCuma
+)
+String.fromCharCode() => Girilen ASCII kod deðerinin karakterini gösterir.
+(
+	#ÖR:
+	alert(String.fromCharCode(84, 82, 65, 75, 89, 65)); //TRAKYA
+)
+indexOf() => Parametre olarak verilen deðeri string ifadenin içinde arar, bulursa ilk geçtiði yerin indeks numarasýný bulamazsa -1 döndürür.
+(
+	#ÖR:
+	var veri="EnglisToh Grammar Today";
+
+	alert(veri.indexOf("To")); //6
+	alert(veri.indexOf("To",6)); //6
+	alert(veri.indexOf("To",7)); //18 NOT: ikinci parametre baþlangýç indeksidir.
+	alert(veri.indexOf("Tod")); //18
+	alert(veri.indexOf("Ýsp")) //-1
+)
+lastIndexOf() => Parametre olarak verilen deðeri string ifadenin içinde arar, bulursa son geçtiði yerin indeks numarasýný bulamazsa -1 döndürür.
+(
+	#ÖR:
+	var veri="EnglisToh Grammar Today";
+
+	alert(veri.lastIndexOf("To")); //18
+	alert(veri.lastIndexOf("To",18)); //18
+	alert(veri.lastIndexOf("To",17)); //6 NOT: Ýkinci parametre bitiþ indeksidir.
+)
+replace() => String ifade içinde deðiþiklik yapmak için kullanýlýr.
+(
+	#ÖR:
+	var bilgi="C# mý Java mý?";
+	
+	document.write(bilgi.replace("mý", "mi")); //C# mi Java mý?  !Dikkat : Deðiþiklik sadece ilk "mý" için yapýlýr.
+	document.write(bilgi); //C# mý Java mý?
+)
+toLowerCase() => harfleri küçültmek için kullanýlýr.
+toUpperCase() => harfleri büyütmek için kullanýlýr.
+(
+	#ÖR:
+	var t="Bilgisayar TEKNOLOJÝSÝ ve bIliþim Sistemleri";
+	
+	document.write(t.toUpperCase()); //BILGISAYAR TEKNOLOJÝSÝ VE BILIÞIM SISTEMLERI  !Dikkat : i'ler I'ya dönüþür.
+	document.write(t.toLowerCase()); //bilgisayar teknolojisi ve biliþim sistemleri  !Dikkat : I'lar i'ye dönüþür.
+)
+sub() => Alt simge haline çevirir.
+sup() => Üst simge haline çevirir.
+(
+	#ÖR:
+	var uc="3";
+
+	document.write("H"+"2".sub()+"O<br>"); //H2O (2 rakamý alt simge olacaktýr)
+	document.write("H2".sub()+"O<br>"); //H2O (H2 alt simge olur)
+	document.write("a"+uc.sup()); //a3
+)
+substr() => String ifade içinde belirtilen konumdan belli sayýda karakteri getirir.
+(
+	#ÖR:
+	var soz="Dokuz at bir kazýða baðlanmaz.";
+
+	document.write(soz.substr(6, 2)); //at
+	document.write(soz.substr(-4, 2)); //ma  NOT: IE 8 ve önceki sürümlerde "Do" deðerini verir.
+	document.write(soz.substr(1)); //okuz at bir kazýða baðlanmaz.
+	document.write(soz.substr(-3)); //az.  NOT: IE 8 ve önceki sürümlerde "Dokuz at bir kazýða baðlanmaz." deðerini verir.
+)
+substring() => String ifade içinde belirtilen iki konum arasýndaki karakterleri getirir.
+(
+	#ÖR:
+	var sifre="QWERTYUIOP";
+
+	document.write(sifre.substring(0,5)); //QWERT
+	document.write(sifre.substring(2)); //ERTYUIOP
+	document.write(sifre.substring(6,1)); //WERTY
+	document.write(sifre.substring(6,-1)); //QWERTY
+	document.write(sifre.substring(-1,2)); //QW
+)
+split() => String ifadeyi bölerek sonucu dizi olarak döndürür. Ýkinci parametre ile dizinin eleman sayýsý ayarlanabilir.
+(
+	#ÖR:
+	var cep="0553 029 77 85";
+	
+	document.write(cep.split(" ")); //0553,029,77,85
+	document.write(cep.split(" ", 3)); //0553,029,77
+	document.write(cep.split("",4)); //0,5,5,3
+
+	ÖR 2:
+	var web="www.erensati.com";
+	
+	document.write(web.split(".")); ///www,erensati,com
+
+	ÖR 3:
+	var mesaj="hýzlý hýzlý yürüdük.";
+
+	document.write(mesaj.split("ýz")); //h,lý h,lý yürüdük.
+)
+
+Math
+E => e sayýsýný verir
+(
+	#ÖR:
+	document.write(Math.E); //2.718281828459045
+)
+LN2 => 2'nin logaritmasýný verir
+(
+	#ÖR:
+	document.write(Math.LN2); //0.6931471805599453 
+)
+LN10 => 10'un logaritmasýný verir
+(
+	#ÖR:
+	document.write(Math.LN10); //2.302585092994046
+)
+PI => pi sayýsýný verir
+(
+	#ÖR:
+	document.write(Math.PI); //3.141592653589793
+)
+SQRT1_2 => 1/2'nin karekökünü verir.
+(
+	#ÖR:
+	document.write(Math.SQRT1_2); //0.7071067811865476
+)
+SQRT2 => 2'nin karekökünü verir.
+(
+	#ÖR:
+	document.write(Math.SQRT2); //1.4142135623730951
+)
+abs() => Verilen sayýnýn mutlak deðerini verir.
+(
+	#ÖR:
+	document.write(Math.abs(-5)); //5
+	document.write(Math.abs(-5/10)); //0.5
+	document.write(Math.abs(-0.2)); //0.2
+)
+sqrt() => Bir sayýnýn karekökünü bulmak için kullanýlýr.
+(
+	#ÖR:
+	document.write(Math.sqrt(36)); //6
+	document.write(Math.sqrt(2.25)); //1.5
+	document.write(Math.sqrt(10*3.6)); //6
+)
+pow() => Üs almak için kullanýlýr.
+(
+	#ÖR:
+	document.write(Math.pow(3,2)); //9
+	document.write(Math.pow(3,3)); //27
+	document.write(Math.pow(3,4)); //81
+	document.write(Math.pow(3/2,2)); //2.25
+	document.write(Math.pow(3.6,2)); //12.96
+)
+ceil() => Verilen virgüllü sayýyý yukarý yuvarlar
+floor() => Verilen virgüllü sayýyý aþaðý yuvarlar
+(
+	#ÖR:
+	document.write(Math.ceil(6.3)+"<br>"); //7
+	document.write(Math.ceil(-2.1)+"<br>"); //-2
+	document.write(Math.floor(6.9)+"<br>"); //6
+	document.write(Math.floor(-6.1)+"<br>"); //-7
+	document.write(Math.ceil(8.669)+"<br>"); //9
+	document.write(Math.floor(4.999)+"<br>"); //4
+	document.write(Math.ceil(6)+"<br>"); //6
+	document.write(Math.floor(-9)+"<br>"); //-9
+)
+round() => Verilen virgüllü sayýyý yakýn olana yuvarlar. 0.5, -2.5, 4.5 gibi bir sonraki ve bir önceki tamsayýya eþit uzaklýktaki deðerler yukarý yuvarlanýr.
+(
+	#ÖR:
+	document.write(Math.round(0.6)+"<br>"); //1
+	document.write(Math.round(0.4)+"<br>"); //0
+	document.write(Math.round(3.5)+"<br>"); //4
+	document.write(Math.round(-2.1)+"<br>"); //-2
+	document.write(Math.round(-2.7)+"<br>"); //-3
+	document.write(Math.round(-2.5)+"<br>"); //-2	
+) 
+max() => Parametre olarak verilen sayýlarýn en büyüðünü getirir.
+min() => Parametre olarak verilen sayýlarýn en küçüðünü getirir.
+(
+	#ÖR:
+	document.write(Math.max(2, 3, 4, 5, 1, 10, 2000, 30)); //2000
+	document.write(Math.min(2, 3, 4, 5, 1, 10, 2000, 30)); //1
+	document.write(Math.max(-5, -10, -50)); //-5
+	document.write(Math.min(-2.2, -2.6)); //-2.6
+)
+random() => 0 ile 1 arasýnda rastgele sayý üretir.
+(
+	#ÖR:
+	document.write(Math.random()+"<br>"); //0.07137295453298264
+	document.write(Math.random()+"<br>"); //0.5380105121592655
+	document.write(Math.random()+"<br>"); //0.7274145914663346 Görüldüðü gibi her seferinde farklý bir deðer elde edilmekte.
+
+	#0 ile 100(0 ve 100 dahil) arasýnda bir tamsayý üretmek için random fonksiyonunu 100 ile çarpýp daha sonra yuvarlama fonksiyonlarýndan biri ile sayýnýn ondalýk kýsmýný atabiliriz.
+	ÖR:
+	document.write(Math.random()*100+"<br>"); //79.1022032978974
+	document.write(Math.round(Math.random()*100)+"<br>"); //92
+
+	Benzer þekilde 0 ile 10(0 ve 10 dahil) arasýnda bir sayý için random fonksiyonu 10'la, 0 ile 1000'arasýnda bir sayý için random fonksiyonu 1000 ile çarpýlýr.
+)
+
+Date
+getDate() => Günü verir.
+getMonth() => Ayý verir.
+getFullYear() => Yýlý verir.
+getDay() => Haftanýn kaçýncý günü olduðunu öðrenmek için kullanýlýr.
+(
+	#ÖR:
+	//Bu örnek 12.12.2015 tarihinde yapýlmýþtýr.
+	var tarih=new Date();
+	document.write(tarih.getDate()+"<br>"); //12
+	document.write(tarih.getMonth()+"<br>"); //11  NOT : 0 => Ocak, 1 => Þubat, 2 => Mart, ..., 11 => Aralýk
+	document.write(tarih.getFullYear()+"<br>"); //2015
+	document.write(tarih.getDay()+"<br>"); //6  NOT : 0 => Pazar, 1 => Pazartesi, 2 => Salý, ..., 6 => Cumartesi
+
+	//Yukarýdaki örnekte sayfaya yazdýrýlan deðerler sistem tarihine baðlýdýr. 
+	//Örneðin bilgisayarýmýzýn tarihini "5.1.2020" olarak ayarlayýp yukarýdaki örneði tekrar çalýþtýrýrsak sonuçlar aþaðýdaki gibi olacaktýr.
+	var tarih=new Date();
+	document.write(tarih.getDate()+"<br>"); //5
+	document.write(tarih.getMonth()+"<br>"); //0
+	document.write(tarih.getFullYear()+"<br>"); //2020
+	document.write(tarih.getDay()+"<br>"); //0
+
+	//Aþaðýdaki örnekte ise gün, ay, yýl gibi bilgiler Date fonksiyonuna parametre olarak verilen tarihten alýnmakta.
+	var tarih=new Date("May 16, 2008 23:15:00");
+	document.write(tarih.getDate()+"<br>"); //16
+	document.write(tarih.getMonth()+"<br>"); //4
+	document.write(tarih.getFullYear()+"<br>"); //2008
+	document.write(tarih.getDay()+"<br>"); //5
+)
+setDate() => Günü deðiþtirmek için kullanýlýr.
+setMonth() => Ayý deðiþtirmek için kullanýlýr.
+setFullYear() => Yýlý deðiþtirmek için kullanýlýr.
+(
+	#ÖR:
+	//Bu örnek 12.12.2015 tarihinde yapýlmýþtýr. Aþaðýdaki örnekte her ne kadar tarihi deðiþtirsek de sistem tarihinde bir deðiþiklik olmaz. Deðiþiklik tarih nesnesi için yapýlýr.
+	var tarih=new Date();
+	document.write(tarih.getDate()+"."+tarih.getMonth()+"."+tarih.getFullYear()+"<br>"); //12.11.2015 
+	tarih.setDate(1);
+	tarih.setMonth(0);
+	tarih.setFullYear(1999);
+	document.write(tarih.getDate()+"."+tarih.getMonth()+"."+tarih.getFullYear()+"<br>"); //1.0.1999
+)
+getHours() =>  Saati verir.
+getMinutes() => Dakikayý verir.
+getSeconds() => Saniyeyi verir.
+getMilliseconds() => Milisaniyeyi verir.
+(
+	#ÖR:
+	//Saatimiz "12:03:56"
+	var tarih=new Date();
+	document.write(tarih.getHours()+"<br>"); //12
+	document.write(tarih.getMinutes()+"<br>"); //3
+	document.write(tarih.getSeconds()+"<br>"); //56
+	document.write(tarih.getMilliseconds()+"<br>"); //462
+
+	//Yukarýdaki örnekte sayfaya yazdýrýlan deðerler sistem saatine baðlýdýr.
+	
+	//Aþaðýdaki örnekte ise saat, dakika, saniye, milisaniye bilgileri Date fonksiyonuna parametre olarak verilen zamandan alýnmakta.
+	var tarih=new Date("16 May, 2008 23:15:00");
+	document.write(tarih.getHours()+"<br>"); //23
+	document.write(tarih.getMinutes()+"<br>"); //15
+	document.write(tarih.getSeconds()+"<br>"); //0
+	document.write(tarih.getMilliseconds()+"<br>"); //0
+)
+setHours() => Saati deðiþtirmek için kullanýlýr.
+setMinutes() => Dakikayý deðiþtirmek için kullanýlýr.
+setSeconds() => Saniyeyi deðiþtirmek için kullanýlýr.
+setMilliseconds() => Milisaniyeyi deðiþtirmek için kullanýlýr.
+(
+	#ÖR:
+	var tarih=new Date("16 May, 2008 23:15:00");
+	document.write(tarih.getHours()+":"+tarih.getMinutes()+":"+tarih.getSeconds()+":"+tarih.getMilliseconds()+"<br>"); //23:15:0:0
+	tarih.setHours(22);
+	tarih.setMinutes(5);
+	tarih.setSeconds(31);
+	tarih.setMilliseconds(32);
+	document.write(tarih.getHours()+":"+tarih.getMinutes()+":"+tarih.getSeconds()+":"+tarih.getMilliseconds()+"<br>"); //22:5:31:32
+
+	ÖR 2:
+	//Saatimiz "12:27:15"
+	var tarih=new Date();
+	document.write(tarih.getHours()+":"+tarih.getMinutes()+":"+tarih.getSeconds()+":"+tarih.getMilliseconds()+"<br>"); //12:27:15:371
+	tarih.setHours(22);
+	tarih.setMinutes(5);
+	tarih.setSeconds(31);
+	tarih.setMilliseconds(32);
+	document.write(tarih.getHours()+":"+tarih.getMinutes()+":"+tarih.getSeconds()+":"+tarih.getMilliseconds()+"<br>"); //22:5:31:32
+
+	//Yukarýdaki örnekte deðiþiklik tarih nesnesi için yapýlýr. Sistem saatinde deðiþiklik olmayacaktýr.
+)
+
+Number
+toFixed() => Virgülden sonra kaç basamak olacaðýný ayarlar.
+(
+	#ÖR:
+	var sayi=367.32342;
+	document.write(sayi.toFixed(1)+"<br>"); //367.3
+	document.write(sayi.toFixed(2)+"<br>"); //367.32
+	document.write(sayi.toFixed(3)+"<br>"); //367.323
+	document.write(sayi); //367.32342
+)
+MAX_VALUE => Number tipindeki deðiþkenlere verebileceðimiz en büyük deðeri gösterir
+(
+	#ÖR:
+	document.write(Number.MAX_VALUE+"<br>"); //1.79e+308
+	document.write(-Number.MAX_VALUE+"<br>"); //-1.79e+308  Bu da verebileceðimiz en küçük deðerdir.
+
+	//Peki bu sayýlardan daha büyük ya da daha küçük bir sayý verilirse ne olur?
+	ÖR 2:
+	var sayi=1.79e+308;
+	document.write(sayi+"<br>"); //1.79e+308;
+	sayi=1.79e+309;
+	document.write(sayi+"<br>"); //Infinity => Bu deðer sýnýrýn aþýldýðýný ifade eder. Peki bir sayýnýn pozitif ya da negatif sýnýrý aþýp aþmadýðýný kontrol edebilir miyiz? Cevap : Evet. Bunun için Number nesnesinin "POSITIVE_INFINITY" ve "NEGATIVE_INFINITY" isimli özellikleri kullanýlýr.
+	alert(typeof(sayi)); //number
+)
+POSITIVE_INFINITY
+NEGATIVE_INFINITY
+(
+	#ÖR:
+	var sayi=-999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999;
+	document.write(sayi+"<br>"); //-Infinity
+	document.write((sayi==Number.POSITIVE_INFINITY)+"<br>"); //false
+	document.write((sayi==Number.NEGATIVE_INFINITY)+"<br>"); //true
+	
+	document.write(Number.POSITIVE_INFINITY+"<br>"); //Infinity
+	document.write(Number.NEGATIVE_INFINITY+"<br>"); //-Infinity
+)
